@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans
+	xmlns="http://www.springframework.org/schema/security"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/security 
+		http://www.springframework.org/schema/security/spring-security.xsd">
+	<http auto-config="true">
+		<intercept-url pattern="/login**" access="permitAll"/>
+		<intercept-url pattern="/logout**" access="permitAll"/>
+		<intercept-url pattern="/home**" access="permitAll"/>
+		<intercept-url pattern="/QuanTriHeThong/phong_ban/**" access="hasRole('ROLE_PITTPP') or hasRole('ROLE_PGD')" />
+		<intercept-url pattern="/QuanTriHeThong/chuc_danh/**" access="hasAnyRole('ROLE_PNSTPP','ROLE_PGD')" />
+		<intercept-url pattern="/QuanTriHeThong/tai-khoan/**" access="hasAnyRole('ROLE_SADM')" />
+		<intercept-url pattern="/QuanTriHeThong/phan-quyen/**" access="hasAnyRole('ROLE_SADM')" />
+		
+		<intercept-url access="permitAll" pattern="/Quanlyvangnghi1703004/soandonmoi/**"/>
+		<intercept-url access=" hasRole('ROLE_PNSNV') or hasRole('ROLE_PDTNV') or hasRole('ROLE_PITNV') or hasRole('ROLE_PDANV') or hasRole('ROLE_PKTNV') or hasRole('ROLE_PNSTPP') or hasRole('ROLE_PGD') or hasRole('ROLE_PDTTPP') or hasRole('ROLE_PDATPP') or hasRole('ROLE_PITTPP') " pattern="/Quanlyvangnghi1703004/danhsachnhap/**"/>
+		<intercept-url access="permitAll" pattern="/Quanlyvangnghi1703004/taodonmoi/choduyet**"/>
+		<intercept-url access=" hasRole('ROLE_PNSNV') or hasRole('ROLE_PNSTPP') or hasRole('ROLE_PGD') or hasRole('ROLE_PDTTPP') or hasRole('ROLE_PDATPP') or hasRole('ROLE_PITTPP') " pattern="/Quanlyvangnghi1703004/danhsachduyet"/>
+		<intercept-url access="hasRole('ROLE_PNSTPP') or hasRole('ROLE_PGD') or hasRole('ROLE_PDATPP') or hasRole('ROLE_PDTTPP') or hasRole('ROLE_PITTPP') " pattern="/Quanlyvangnghi1703004/**"/>
+			
+		<!-- Phân quyền module QLVN - HuongVTL :: START -->
+		
+		<intercept-url pattern="/QuanLyVangNghi/duyetvong1/**"  access="hasRole('ROLE_PNSTPP')"/>
+		<intercept-url pattern="/QuanLyVangNghi/duyetvong2/**"  access="hasRole('ROLE_PGD')"/>
+		<!-- Phân quyền module QLVN - HuongVTL :: END -->
+		
+		<access-denied-handler error-page="/403"/>		
+		<logout logout-url="/j_spring_security_logout"
+			logout-success-url="/login" delete-cookies="JSESSIONID" />
+		<form-login login-page="/login"
+			login-processing-url="/j_spring_security_login"
+			default-target-url="/" authentication-failure-url="/login?error"
+			username-parameter="username" password-parameter="password"
+			authentication-failure-handler-ref="customAuthenticationFailureHandler" />
+		<session-management
+			invalid-session-url="/login?message=timeout"
+			session-fixation-protection="newSession">
+			<concurrency-control
+				error-if-maximum-exceeded="false"
+				expired-url="/login?message=max_session" max-sessions="1" />
+		</session-management>
+	</http>
+	<beans:bean id="myUserDetailsService"
+		class="fasttrackse.ffse1703.fbms.service.security.UserServiceImpl"></beans:bean>
+	<beans:bean id="customAuthenticationFailureHandler"
+		class="fasttrackse.ffse1703.fbms.controller.security.CustomAuthenticationFailureHandler"></beans:bean>
+	<authentication-manager>
+		<authentication-provider
+			user-service-ref="myUserDetailsService">
+			 <password-encoder hash="bcrypt" /> 
+		</authentication-provider>
+	</authentication-manager>
+</beans:beans>
