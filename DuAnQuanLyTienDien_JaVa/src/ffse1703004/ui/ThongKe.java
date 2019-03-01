@@ -56,9 +56,9 @@ public class ThongKe extends JPanel {
 	JTextField txtSearch;
 	JButton btnSearch2, btnSearch3, btnSearch4;
 	private DefaultTableModel model = new DefaultTableModel(new Object[] { "Mã khách hàng", "Mã công tơ", "Họ tên",
-			"Địa chỉ", "Phường", "Quận", "Điện thoại", "Email" }, 0);
+			"Địa chỉ", "Quận", "Phường","Điện thoại", "Email" }, 0);
 	private DefaultTableModel model1 = new DefaultTableModel(new Object[] { "Mã biên lai", "Mã khách hàng",
-			"Mã công tơ", "Tên khách hàng", "Địa chỉ", "Phường","Quận" , "Điện thoại", "Email", "Chu kì", "Số tiền" },
+			"Mã công tơ", "Tên khách hàng", "Địa chỉ","Quận" ,"Phường","Điện thoại", "Email", "Chu kì", "Số tiền" },
 			0);
 	final JTable table = new JTable(model);
 	final JTable table1 = new JTable(model1);

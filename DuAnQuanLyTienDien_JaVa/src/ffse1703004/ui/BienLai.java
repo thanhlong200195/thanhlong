@@ -55,7 +55,7 @@ public class BienLai extends JPanel {
 	JTextField txtSearch, txtMeterID, txtDateAdded, txtMeterIndex;
 	private JButton btnSearch, butThem, butSua, butXoa, butTroVe;
 	private DefaultTableModel model = new DefaultTableModel(
-			new Object[] { "Mã biên lai", "Mã Công tơ",  "Ngày nhập", "Chu kì nhập","Chỉ số công tơ", "Số tiền" }, 0);
+			new Object[] { "Mã biên lai", "Mã Công tơ",  "Ngày nhập", "Chu kì nhập","Chỉ số cũ", "Chỉ số mới" ,"Số tiền" }, 0);
 	final JTable table = new JTable(model);
 	JScrollPane sc = new JScrollPane(table);
 	JComboBox<?> cbBxmonth, cbBxyear;
@@ -203,13 +203,14 @@ public class BienLai extends JPanel {
 				PreparedStatement ptmt = (PreparedStatement) conn.prepareStatement(sql);
 				ResultSet rs = ptmt.executeQuery();
 				while (rs.next()) {
-					String rows[] = new String[6];
+					String rows[] = new String[7];
 					rows[0] = rs.getString(1);
 					rows[1] = rs.getString(2);
 					rows[2] = rs.getString(3);
 					rows[3] = rs.getString(4);
 					rows[4] = rs.getString(5);
 					rows[5] = rs.getString(6);
+					rows[6] = rs.getString(7);
 					model.addRow(rows);
 					
 				}
@@ -278,7 +279,7 @@ public class BienLai extends JPanel {
 							meterNumber = recentMeterIndex - lastestMeterIndex;
 							int thanhtien = heSoQuyDoi(meterNumber);
 
-							if (ffse1703004.model.DBConnection.addInvoice(mact, ngaynhap, cycle, recentMeterIndex,
+							if (ffse1703004.model.DBConnection.addInvoice(mact, ngaynhap, cycle, lastestMeterIndex ,recentMeterIndex,
 									thanhtien)) {
 								JOptionPane.showMessageDialog(null, "Thêm thành công");
 								String sql = "select * from bienlai";
@@ -294,6 +295,7 @@ public class BienLai extends JPanel {
 										rows[3] = rs.getString(4);
 										rows[4] = rs.getString(5);
 										rows[5] = rs.getString(6);
+										rows[6] = rs.getString(7);
 										model.addRow(rows);
 									}
 								} catch (SQLException e1) {

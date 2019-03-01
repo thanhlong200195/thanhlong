@@ -40,7 +40,7 @@ public class KhachHang extends JPanel {
 	private JTextField txtTimKiem;
 	private JButton btnSearch1,butThem,butSua,butXoa,butTroVe;
 	public static ArrayList<KhachHangMD> arr = new ArrayList<KhachHangMD>();
-	private DefaultTableModel model = new DefaultTableModel(new Object[] { "Mã khách hàng", "Mã công tơ","Họ tên", "Địa chỉ", "Phường","Quận",
+	private DefaultTableModel model = new DefaultTableModel(new Object[] { "Mã khách hàng", "Mã công tơ","Họ tên", "Địa chỉ","Quận", "Phường",
 			"Điện thoại", "Email" }, 0);
 	private JComboBox<Object> cbBxQuan1, cbBxPhuong1;
 //	private JTextField txtFldId;

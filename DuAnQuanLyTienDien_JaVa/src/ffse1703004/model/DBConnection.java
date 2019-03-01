@@ -144,15 +144,16 @@ public class DBConnection {
 		}
 	}
 
-	public static boolean addInvoice(String mact, String ngaynhap, String chuki, int chisoct, int thanhtien) {
+	public static boolean addInvoice(String mact, String ngaynhap, String chuki, int chisocu, int chisomoi, int thanhtien) {
 		try {
-			String sql = "insert into bienlai ( mact, ngaynhap, chuki, chisoct, thanhtien) values ( ?, ?, ?, ?, ? )";
+			String sql = "insert into bienlai ( mact, ngaynhap, chuki, chisocu, chisomoi, thanhtien) values ( ?, ?, ?, ?, ?, ? )";
 			PreparedStatement stm = (PreparedStatement) conn.prepareStatement(sql);
 			stm.setString(1, mact);
 			stm.setString(2, ngaynhap);
 			stm.setString(3, chuki);
-			stm.setInt(4, chisoct);
-			stm.setInt(5, thanhtien);
+			stm.setInt(4, chisocu);
+			stm.setInt(5, chisomoi);
+			stm.setInt(6, thanhtien);
 			int x = stm.executeUpdate();
 			if (x > 0) {
 				return true;
@@ -167,7 +168,7 @@ public class DBConnection {
 
 	public static boolean editInvoice(String cycle, String meterIndex, int amount, int invoiceID) {
 		try {
-			String sql = "update bienlai set chuki = ?, chisoct = ?, thanhtien = ? where id=?";
+			String sql = "update bienlai set chuki = ?, chisomoi = ?, thanhtien = ? where id=?";
 			PreparedStatement stm = (PreparedStatement) conn.prepareStatement(sql);
 			stm.setString(1, cycle);
 			stm.setString(2, meterIndex);
@@ -188,7 +189,7 @@ public class DBConnection {
 
 	public static ResultSet getPreMeterIndexForEdit(String meterID, int invoiceID) {
 		try {
-			String sql = "SELECT max(chisoct) from bienlai where mact = ? AND (id BETWEEN 1 AND ?)";
+			String sql = "SELECT max(chisomoi) from bienlai where mact = ? AND (id BETWEEN 1 AND ?)";
 			PreparedStatement stm = (PreparedStatement) conn.prepareStatement(sql);
 			stm.setString(1, meterID);
 			stm.setInt(2, invoiceID - 1);
@@ -202,7 +203,7 @@ public class DBConnection {
 
 	public static ResultSet getLastMeterIndex(String meterID) {
 		try {
-			String sql = "SELECT chisoct from bienlai where chisoct = ?";
+			String sql = "SELECT chisomoi from bienlai where chisoct = ?";
 			PreparedStatement stm = (PreparedStatement) conn.prepareStatement(sql);
 			stm.setString(1, meterID);
 			ResultSet result = stm.executeQuery();
@@ -215,7 +216,7 @@ public class DBConnection {
 
 	public static ResultSet getNextMeterIndexForEdit(String meterID, int invoiceID, int lastInvoiceID) {
 		try {
-			String sql = "SELECT min(chisoct) from bienlai where mact = ? AND (id BETWEEN ? AND ?)";
+			String sql = "SELECT min(chisomoi) from bienlai where mact = ? AND (id BETWEEN ? AND ?)";
 			PreparedStatement stm = (PreparedStatement) conn.prepareStatement(sql);
 			stm.setString(1, meterID);
 			stm.setInt(2, invoiceID + 1);
