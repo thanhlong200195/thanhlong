@@ -176,6 +176,7 @@ public class ThongKe extends JPanel {
 			btnSearch2 = new JButton("Tìm kiếm");
 			pnYear.add(jycPn1);
 			pnYear.add(btnSearch2);
+			
 			JPanel pnInterval = new JPanel();
 			jmcStart = new JMonthChooser();
 			jycStart = new JYearChooser();
@@ -191,6 +192,7 @@ public class ThongKe extends JPanel {
 			pnInterval.add(jmcEnd);
 			pnInterval.add(jycEnd);
 			pnInterval.add(btnSearch3);
+			
 			JPanel pnTerm = new JPanel();
 			jmcPn3 = new JMonthChooser();
 			jycPn3 = new JYearChooser();
