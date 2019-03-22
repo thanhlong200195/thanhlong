@@ -34,7 +34,6 @@ public class DanhMuc extends JFrame {
 		pnMain.setLayout(new BoxLayout(pnMain, BoxLayout.X_AXIS));
 		JPanel pnMain1 = new JPanel();
 		JPanel pnMain2 = new JPanel();
-		JPanel card = new JPanel();
 		CardLayout tl =new CardLayout();
 		pnMain1.setLayout(new BoxLayout(pnMain1, BoxLayout.Y_AXIS));
 		pnMain1.setPreferredSize(new Dimension(150, 50));
@@ -112,8 +111,6 @@ public class DanhMuc extends JFrame {
 		pnMain1.add(panBL);
 		pnMain1.add(panTK);
 		pnMain1.add(panLG);
-		pnMain2.add(card);
-
 		pnMain.add(pnMain1);
 		pnMain.add(pnMain2);
 		con.add(pnMain);
