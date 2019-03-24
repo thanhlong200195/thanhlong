@@ -7,8 +7,6 @@ import java.awt.Font;
 import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -21,6 +19,7 @@ import javax.swing.JTextField;
 
 import qlnv.model.DBConnection;
 
+@SuppressWarnings("serial")
 public class Login extends JFrame {
 	JTextField txtUser;
 	private JPasswordField txtPass;
@@ -124,6 +123,7 @@ public class Login extends JFrame {
 		}
 	};
 
+	@SuppressWarnings("deprecation")
 	boolean login() {
 		if (DBConnection.checkLogin(txtUser.getText(), txtPass.getText())) {
 			return true;
