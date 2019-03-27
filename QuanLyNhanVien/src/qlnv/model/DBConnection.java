@@ -10,7 +10,7 @@ import com.mysql.jdbc.PreparedStatement;
 
 public class DBConnection {
 		//gọi tới phương thức kết nối
-		static Connection conn = ketNoi("localhost","quan_ly_tien_dien","root","");
+		static Connection conn = ketNoi("localhost","quanlynhanvien","root","");
 
 		public static void main(String[] args) {
 			if(conn != null) {
@@ -26,7 +26,7 @@ public class DBConnection {
 			Connection conn = null;
 			String strConnect = "jdbc:mysql://" + strServer + "/" + strDatabase + "?useUnicode=true&characterEncoding=utf-8";
 			Properties pro = new Properties();
-			pro.put("user", strUser);
+			pro.put("username", strUser);
 			pro.put("password", strPass);
 			try {
 				com.mysql.jdbc.Driver driver = new Driver();

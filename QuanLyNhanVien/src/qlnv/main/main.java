@@ -10,7 +10,7 @@ public class main {
 		public static void main(String[] args) {
 			Login login = new Login("QUẢN LÝ NHÂN VIÊN");
 			login.showWindow();
-			Connection conn = DBConnection.ketNoi("localhost", "quan_ly_tien_dien", "root", "");
+			Connection conn = DBConnection.ketNoi("localhost", "quanlynhanvien", "root", "");
 			if(conn != null) {
 				System.out.println("Kết nối Mysql thành công");
 			} else {
