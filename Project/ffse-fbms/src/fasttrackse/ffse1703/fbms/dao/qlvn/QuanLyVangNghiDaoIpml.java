@@ -117,6 +117,13 @@ public class QuanLyVangNghiDaoIpml implements QuanLyVangNghiDao {
 				+ thongKeDonXinPhep.getNgayNghi().getMaNhanVien() + "'").getSingleResult().toString();
 		return Integer.parseInt(rowCount);
 	}
+	
+	public int kiemTraTrangThai(ThongKeDonXinPhep thongKeDonXinPhep) {
+		Session session = sessionFactory.getCurrentSession();
+		String valueTrangThai = session.createSQLQuery("select `trang_thai` from `thong_ke_don_xin_phep` where `ma_nhan_vien = '"
+				+ thongKeDonXinPhep.getTrangThai()+"'").getSingleResult().toString();
+		return Integer.parseInt(valueTrangThai);	
+	}
 
 	public void create(ThongKeDonXinPhep thongKeDonXinPhep) {
 		Session session = this.sessionFactory.getCurrentSession();
@@ -125,7 +132,7 @@ public class QuanLyVangNghiDaoIpml implements QuanLyVangNghiDao {
 					"INSERT INTO `ngay_nghi`(`ma_nhan_vien`,`so_ngay_da_nghi`,`so_ngay_con_lai`,`ten_nhan_vien`) VALUES ('"
 							+ thongKeDonXinPhep.getNgayNghi().getMaNhanVien() + "', '0', '12', '"+ thongKeDonXinPhep.getTenNhanVien() +"')")
 					.executeUpdate();
-		} 
+		} 	
 		session.save(thongKeDonXinPhep);
 		session.createQuery("update ThongKeDonXinPhep set trangThai = '1'  where id =" + thongKeDonXinPhep.getId())
 				.executeUpdate();
